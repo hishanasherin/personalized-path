@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Personalized Path — AI-Powered Learning Roadmaps{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Powered by IBM Granite · watsonx.ai</div>
+      <h1 class="hero-title">
+        Your learning path,<br>
+        <span class="highlight">built by AI</span>
+      </h1>
+      <p class="hero-desc">
+        Stop guessing what to study next. Tell us your goal and skill level — 
+        IBM Granite generates a personalized 12-week roadmap with projects, 
+        resources, and certifications tailored just for you.
+      </p>
+      <div class="hero-cta">
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Start for free →</a>
+        <a href="{{ url_for('login') }}" class="btn btn-ghost btn-lg">Sign in</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Week roadmaps</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">IBM</div>
+          <div class="stat-label">Granite LLM</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">8+</div>
+          <div class="stat-label">Career tracks</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Free</div>
+          <div class="stat-label">Resources only</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Everything you need to level up</h2>
+      <p class="section-desc">From beginner to job-ready — the AI mentor that adapts to your pace.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🗺</div>
+        <div class="feature-title">AI Roadmap Generator</div>
+        <p class="feature-desc">IBM Granite creates a detailed week-by-week learning plan based on your career goal, current skills, and available study time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">Chat Assistant</div>
+        <p class="feature-desc">Ask anything — "What is Deep Learning?", "Best Python projects for beginners", "How to prepare for ML interviews." Get instant answers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Career Guidance</div>
+        <p class="feature-desc">Get role-specific advice: required skills, resume tips, expected salary ranges, interview preparation, and top certifications to pursue.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <div class="feature-title">Resource Recommendations</div>
+        <p class="feature-desc">Curated free resources — YouTube channels, documentation, IBM SkillsBuild courses, GitHub repositories, and practice platforms.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔖</div>
+        <div class="feature-title">Learning History</div>
+        <p class="feature-desc">Every roadmap you generate is saved. Come back anytime to review your past learning plans and track how your goals evolve.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Personalized to You</div>
+        <p class="feature-desc">Beginner or advanced, 1 hour or 5 hours a day — Granite adapts the plan to your exact situation, not a generic template.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech badge -->
+<section style="padding: 48px 0 80px; border-top: 1px solid var(--border);">
+  <div class="container text-center">
+    <p class="text-muted" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:20px;">Built with</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <span class="badge badge-accent">IBM watsonx.ai</span>
+      <span class="badge badge-purple">Granite-3.3-8b-instruct</span>
+      <span class="badge badge-accent">Python · Flask</span>
+      <span class="badge badge-green">IBM SkillsBuild</span>
+      <span class="badge badge-accent">SQLite</span>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Personalized Path{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <h1 class="page-title">Good to see you, {{ username }} 👋</h1>
+      <p class="page-subtitle">Your AI-powered learning mentor is ready.</p>
+    </div>
+    <a href="{{ url_for('profile') }}" class="btn btn-ghost">Edit Profile</a>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <!-- Left column -->
+    <div>
+      <!-- Profile summary -->
+      <div class="card card-glow" style="margin-bottom:20px;">
+        <div class="card-header">
+          <span class="card-title">🎯 Your Goal</span>
+          <a href="{{ url_for('profile') }}" style="font-size:0.8rem; color:var(--accent); text-decoration:none;">Edit →</a>
+        </div>
+        {% if prefs %}
+          <div class="profile-item">
+            <span class="profile-item-label">Career Goal</span>
+            <span class="profile-item-value">{{ prefs['career_goal'] or '—' }}</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-item-label">Skill Level</span>
+            <span class="profile-item-value">
+              <span class="badge badge-{% if prefs['skill_level'] == 'Beginner' %}green{% elif prefs['skill_level'] == 'Intermediate' %}accent{% else %}purple{% endif %}">
+                {{ prefs['skill_level'] or '—' }}
+              </span>
+            </span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-item-label">Known Skills</span>
+            <span class="profile-item-value">{{ prefs['known_skills'] or '—' }}</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-item-label">Interests</span>
+            <span class="profile-item-value">{{ prefs['interests'] or '—' }}</span>
+          </div>
+          <div class="profile-item">
+            <span class="profile-item-label">Daily Study Time</span>
+            <span class="profile-item-value">{{ prefs['study_hours'] or '2' }} hrs/day</span>
+          </div>
+          <button id="generate-btn" class="btn btn-primary btn-full" style="margin-top:20px;">
+            🗺 Generate My Roadmap
+          </button>
+        {% else %}
+          <p class="text-muted" style="font-size:0.875rem; margin-bottom:16px;">
+            Complete your profile to generate a personalized roadmap.
+          </p>
+          <a href="{{ url_for('profile') }}" class="btn btn-primary btn-full">Set up my profile →</a>
+        {% endif %}
+      </div>
+
+      <!-- Recent history -->
+      {% if history %}
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🕐 Recent Roadmaps</span>
+          <a href="{{ url_for('history') }}" style="font-size:0.8rem; color:var(--accent); text-decoration:none;">All →</a>
+        </div>
+        {% for item in history %}
+        <div style="padding:10px 0; border-bottom:1px solid var(--border); font-size:0.82rem;">
+          <div style="color:var(--text-muted); font-family:var(--font-mono); margin-bottom:4px;">{{ item['created_at'][:10] }}</div>
+          <div style="color:var(--text-dim);">{{ item['roadmap'][:100] }}...</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Right column -->
+    <div>
+      <!-- Roadmap output -->
+      <div class="card card-glow hidden" id="roadmap-card" style="margin-bottom:20px;">
+        <div class="card-header">
+          <span class="card-title">🗺 Your Learning Roadmap</span>
+          <span class="badge badge-green">IBM Granite</span>
+        </div>
+        <pre id="roadmap-output"></pre>
+      </div>
+
+      <!-- Chat assistant -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">💬 Ask Your AI Mentor</span>
+          <span class="badge badge-purple">Granite-3.3-8b</span>
+        </div>
+        <div class="chat-window" id="chat-window">
+          <div class="chat-msg ai">
+            <div class="chat-bubble">
+              Hi! I'm your AI learning mentor powered by IBM Granite. Ask me anything — career advice, concept explanations, project ideas, or interview tips! 🚀
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" class="form-control" placeholder="What is machine learning? / Best Python projects..." />
+          <button id="chat-send" class="btn btn-primary">Send</button>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('chat-input').value='What field are you interested in?'">💡 Sample Q</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('chat-input').value='What are the best free resources for AI?'">📚 Resources</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('chat-input').value='How do I prepare for a data science interview?'">🎤 Interview</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

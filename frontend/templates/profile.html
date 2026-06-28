@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Profile — Personalized Path{% endblock %}
+
+{% block content %}
+<div style="max-width:600px; margin:48px auto; padding:0 24px;">
+  <div style="margin-bottom:28px;">
+    <a href="{{ url_for('dashboard') }}" style="color:var(--text-muted); text-decoration:none; font-size:0.875rem;">← Back to Dashboard</a>
+    <h1 class="page-title" style="margin-top:12px;">Set up your profile</h1>
+    <p class="page-subtitle">Tell the AI about yourself so it can personalize your roadmap.</p>
+  </div>
+
+  <div class="card card-glow">
+    <form method="POST" action="{{ url_for('profile') }}">
+
+      <div class="form-group">
+        <label class="form-label">Career Goal</label>
+        <select name="career_goal" class="form-control" required>
+          <option value="">Select your target role...</option>
+          {% set goals = ['AI Engineer', 'Data Scientist', 'Full Stack Developer', 'Frontend Developer', 'Backend Developer', 'DevOps Engineer', 'Cybersecurity Analyst', 'Cloud Architect', 'Mobile Developer', 'Machine Learning Engineer'] %}
+          {% for g in goals %}
+          <option value="{{ g }}" {% if prefs and prefs['career_goal'] == g %}selected{% endif %}>{{ g }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Current Skill Level</label>
+        <select name="skill_level" class="form-control" required>
+          <option value="">Select your level...</option>
+          {% for lvl in ['Beginner', 'Intermediate', 'Advanced'] %}
+          <option value="{{ lvl }}" {% if prefs and prefs['skill_level'] == lvl %}selected{% endif %}>{{ lvl }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Known Skills / Languages</label>
+        <input type="text" name="known_skills" class="form-control"
+          placeholder="e.g. Python, HTML, SQL, JavaScript"
+          value="{{ prefs['known_skills'] if prefs else '' }}" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Interests / Topics</label>
+        <input type="text" name="interests" class="form-control"
+          placeholder="e.g. Machine Learning, Web Development, Cloud"
+          value="{{ prefs['interests'] if prefs else '' }}" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Daily Study Time (hours)</label>
+        <select name="study_hours" class="form-control">
+          {% for h in ['1', '2', '3', '4', '5', '6+'] %}
+          <option value="{{ h }}" {% if prefs and prefs['study_hours'] == h %}selected{% endif %}>{{ h }} hour{% if h != '1' %}s{% endif %} per day</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-top:8px;">
+        <button type="submit" class="btn btn-primary" style="flex:1;">Save & Generate Roadmap →</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-ghost">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="card" style="margin-top:20px; background:var(--accent-glow); border-color:rgba(79,142,247,0.2);">
+    <p style="font-size:0.85rem; color:var(--text-dim); line-height:1.7;">
+      💡 <strong style="color:var(--text);">Tip:</strong> The more specific you are, the better IBM Granite can personalize your roadmap. For example, instead of "programming", try "Python for Data Science with NumPy and Pandas."
+    </p>
+  </div>
+</div>
+{% endblock %}

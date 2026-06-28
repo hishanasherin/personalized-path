@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}History — Personalized Path{% endblock %}
+
+{% block content %}
+<div style="max-width:900px; margin:48px auto; padding:0 24px;">
+  <div style="margin-bottom:28px;" class="flex-between">
+    <div>
+      <a href="{{ url_for('dashboard') }}" style="color:var(--text-muted); text-decoration:none; font-size:0.875rem;">← Dashboard</a>
+      <h1 class="page-title" style="margin-top:12px;">Learning History</h1>
+      <p class="page-subtitle">All your AI-generated roadmaps, saved automatically.</p>
+    </div>
+    <span class="badge badge-accent">{{ records|length }} roadmap{% if records|length != 1 %}s{% endif %}</span>
+  </div>
+
+  {% if records %}
+    {% for item in records %}
+    <div class="history-item">
+      <div class="history-meta">
+        <span class="badge badge-purple">IBM Granite</span>
+        <span class="history-date">{{ item['created_at'][:16].replace('T', ' ') }}</span>
+      </div>
+      <div class="history-preview">{{ item['roadmap'][:300] }}...</div>
+      <div class="history-full" style="display:none; margin-top:12px;">
+        <pre style="white-space:pre-wrap; font-family:var(--font-mono); font-size:0.82rem; color:var(--text-dim); line-height:1.8;">{{ item['roadmap'] }}</pre>
+      </div>
+      <button class="btn btn-ghost btn-sm history-toggle" style="margin-top:12px;">Show roadmap ↓</button>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="card text-center" style="padding:60px 24px;">
+      <div style="font-size:2.5rem; margin-bottom:16px;">🗺</div>
+      <p style="color:var(--text-muted); margin-bottom:20px;">No roadmaps generated yet. Head to your dashboard and generate your first one!</p>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard →</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

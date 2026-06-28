@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Login — Personalized Path{% endblock %}
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <a href="{{ url_for('index') }}" style="text-decoration:none; color:inherit;">
+        <div class="auth-logo-mark">🎯</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1rem;">Personalized Path</div>
+      </a>
+    </div>
+    <h1 class="auth-title">Welcome back</h1>
+    <p class="auth-sub">Sign in to continue your learning journey</p>
+
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Your password" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px">Sign in →</button>
+    </form>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="{{ url_for('register') }}">Create one free</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

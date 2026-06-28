@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Register — Personalized Path{% endblock %}
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <a href="{{ url_for('index') }}" style="text-decoration:none; color:inherit;">
+        <div class="auth-logo-mark">🎯</div>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:1rem;">Personalized Path</div>
+      </a>
+    </div>
+    <h1 class="auth-title">Create your account</h1>
+    <p class="auth-sub">Start your AI-guided learning journey today</p>
+
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('register') }}">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="hishana_sherin" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Minimum 8 characters" required minlength="8" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px">Create account →</button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account? <a href="{{ url_for('login') }}">Sign in</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
