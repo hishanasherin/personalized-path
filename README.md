@@ -35,13 +35,26 @@ Interactive UI showing the starter questions that guide students.
 ### Live Roadmap Output
 The agent generates structured roadmaps with topics, tools, resources, and advice.
 
-![Roadmap Output 1](screenshots/Screenshot_2025-08-04_191911.png)
-![Roadmap Output 2](screenshots/Screenshot_2025-08-04_191932.png)
 
 ### Deployment on IBM Cloud
 The agent is deployed as an online service with private and public endpoints.
 
-![Deployment](screenshots/Screenshot_2025-08-04_183530.png)
+
+### Saving the Agent
+Saving the agent as an editable asset in the watsonx project.
+
+
+### Agent Preview — Roadmap Output (Page 1)
+Granite generates key topics, tools, and free resources for Frontend Development.
+
+
+### Agent Preview — Roadmap Output (Page 2)
+Free online course links and practical advice continue in the response.
+
+
+### NutriBuddy — Additional Agent Built in Same Project
+A second agent (NutriBuddy) was also created to demonstrate multi-agent capability on watsonx.ai.
+
 
 ---
 
